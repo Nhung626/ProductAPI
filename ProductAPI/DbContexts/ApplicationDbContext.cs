@@ -19,7 +19,7 @@ namespace ProductAPI.DbContexts
                entity.Property(e => e.ProductName)
                    .IsUnicode()
                    .IsRequired();
-               entity.Property(e => e.Status)
+               entity.Property(e => e.Description)
                    .IsUnicode()
                    .IsRequired();
                 entity.Property(e => e.Price)

@@ -39,7 +39,7 @@ namespace ProductAPI.Services.Implements
             // query = query.Select(s=> new ProductDto{
             //     Id =  s.Id,
             //     ProductName = s.ProductName,
-            //     Status = s.Status,
+            //     Description = s.Description,
             //     Price = s.Price
             // });
             // Tổng số sản phẩm
@@ -66,7 +66,7 @@ namespace ProductAPI.Services.Implements
 
         public Product GetProductById(int id)
         {
-            var product = _dbContext.Products.Find(id);
+            var product = _dbContext.Products.FirstOrDefault(s => s.Id == id);
             if (product == null)
             {
                 throw new UserFriendlyException($"Không tìm thấy sản phẩm có id = {id}");
@@ -77,7 +77,7 @@ namespace ProductAPI.Services.Implements
         {
             _dbContext.Products.Add(new Product{
                 ProductName = input.ProductName,
-                Status = input.Status,
+                Description = input.Description,
                 Price = input.Price
             });
             _dbContext.SaveChanges();
@@ -85,7 +85,7 @@ namespace ProductAPI.Services.Implements
 
         public Product UpdateProduct(UpdateProductDto input)
         {
-            var product = _dbContext.Products.Find(input.Id);
+            var product = _dbContext.Products.FirstOrDefault(s => s.Id == input.Id);
             if (product == null)
             {
                 throw new UserFriendlyException($"Không tìm thấy sản phẩm có id = {input.Id}");
@@ -93,7 +93,7 @@ namespace ProductAPI.Services.Implements
             }
 
             product.ProductName = input.ProductName;
-            product.Status = input.Status;
+            product.Description = input.Description;
             product.Price = input.Price;
 
             _dbContext.SaveChanges();
@@ -103,7 +103,7 @@ namespace ProductAPI.Services.Implements
 
         public bool DeleteProduct(int id)
         {
-            var product = _dbContext.Products.Find(id);
+            var product = _dbContext.Products.FirstOrDefault(s =>  s.Id==id);
             if (product == null)
             {
                 return false;

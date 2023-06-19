@@ -13,7 +13,7 @@ namespace ProductAPI.Enities{
         public string ProductName{get; set;}
         [Required] 
         [MaxLength(100)]
-        public string Status{get; set;}
-        public float Price{get; set;}
+        public string Description{get; set;}
+        public Double Price{get; set;}
     }
 }
